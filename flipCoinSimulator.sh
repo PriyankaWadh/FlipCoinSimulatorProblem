@@ -21,5 +21,27 @@ then
 		echo "Tail won by "$diff
 	fi
 else
-	echo "Tie made"
+	diff=0
+	while [ $diff -lt 2 ]
+	do
+	        if [ $(( RANDOM%2 )) -eq 0 ]
+        	then
+                    head1=$(( head1+1 ))
+        	else
+        	    tail1=$(( tail1+1 ))
+	        fi
+		if [ $head1 -gt $tail1 ]
+		then
+			diff=$(( head1-tail1 ))
+		elif [ $tail1 -gt $head1 ]
+		then
+			diff=$(( tail1-head1 ))
+		fi
+	done
+	if [ $head1 -gt $tail1 ]
+	then
+		echo "Head won"
+	else
+		echo "Tail won"
+	fi
 fi
